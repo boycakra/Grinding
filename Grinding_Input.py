@@ -38,12 +38,14 @@ else:
 with st.sidebar:
     st.markdown("## Enter Production Data")
 
-    today_date = datetime.today().strftime('%Y-%m-%d')
+    date = st.date_input("📅 Date", datetime.today())
+    today_date = date.strftime('%Y-%m-%d')
 
-    st.markdown("### Date & Time")
     col1, col2, col3 = st.columns([1, 1, 1])
+
     with col1:
-        st.write(f"📅 **Date:** {today_date}")
+      st.write(f"Date: {today_date}") #display date
+
     with col2:
         start_time = st.selectbox("Start", pd.date_range("07:00", "23:00", freq="1H").strftime("%H:%M"))
     with col3:
@@ -95,9 +97,9 @@ with st.sidebar:
     # Delete row functionality
     if len(st.session_state.df) > 0:
         st.markdown("### Delete a Row:")
-        
-        row_index = st.selectbox("Select a row to delete:", 
-                                    options=st.session_state.df.index, 
+
+        row_index = st.selectbox("Select a row to delete:",
+                                    options=st.session_state.df.index,
                                     format_func=lambda x: f"Row {x+1}: {st.session_state.df.iloc[x]['Date']} | {st.session_state.df.iloc[x]['Start']} - {st.session_state.df.iloc[x]['Finish']}"
                                     )
 
