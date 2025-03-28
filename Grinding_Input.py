@@ -90,19 +90,19 @@ with st.sidebar:
         st.session_state.df = pd.concat([st.session_state.df, pd.DataFrame([row_data])], ignore_index=True)
         save_data(st.session_state.df)  # Save to CSV
         st.success("Row added successfully!")
-        st.experimental_rerun()  # Refresh to update DataFrame at the top
+        st.rerun()  # Use st.rerun() instead of st.experimental_rerun()
 
     # Delete row functionality
     if len(st.session_state.df) > 0:
         st.markdown("### Delete a Row:")
         
         row_index = st.selectbox("Select a row to delete:", 
-                                options=st.session_state.df.index, 
-                                format_func=lambda x: f"Row {x+1}: {st.session_state.df.iloc[x]['Date']} | {st.session_state.df.iloc[x]['Start']} - {st.session_state.df.iloc[x]['Finish']}"
-                                )
+                                    options=st.session_state.df.index, 
+                                    format_func=lambda x: f"Row {x+1}: {st.session_state.df.iloc[x]['Date']} | {st.session_state.df.iloc[x]['Start']} - {st.session_state.df.iloc[x]['Finish']}"
+                                    )
 
         if st.button("Delete Selected Row", key="delete_button", help="Click to delete the selected row"):
             st.session_state.df = st.session_state.df.drop(index=row_index).reset_index(drop=True)
             save_data(st.session_state.df)  # Save after deletion
             st.warning(f"Deleted row {row_index + 1}")
-            st.experimental_rerun()  # Refresh to update DataFrame at the top
+            st.rerun()  # Use st.rerun() instead of st.experimental_rerun()
