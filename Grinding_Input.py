@@ -41,36 +41,35 @@ with st.sidebar:
     date = st.date_input("📅 Date", datetime.today())
     today_date = date.strftime('%Y-%m-%d')
 
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col2, col3 = st.columns([1, 1])
 
-    with col1:
-      st.write(f"Date: {today_date}") #display date
+  
 
     with col2:
         start_time = st.selectbox("Start", pd.date_range("07:00", "23:00", freq="1H").strftime("%H:%M"))
     with col3:
         finish_time = st.selectbox("Finish", pd.date_range("08:00", "23:00", freq="1H").strftime("%H:%M"))
 
-    style = st.selectbox("Style", ["AA1", "BA1", "BB1"])
+    style = st.selectbox("👟Style", ["AA1", "BA1", "BB1"])
 
     st.markdown("### Size, Qty & Output")
     col4, col5, col6 = st.columns(3)
     with col4:
-        size = st.selectbox("Size", list(range(5, 14)))
+        size = st.selectbox(" 📏Size", list(range(5, 14)))
     with col5:
-        qty = st.number_input("Qty", min_value=0)
+        qty = st.number_input("📦Qty", min_value=0)
     with col6:
         total_output = st.number_input("Total Output", min_value=0)
 
-    st.markdown("### Temperature (R & L)")
+    st.markdown("### 🌡️Temperature (R & L)")
     col7, col8 = st.columns(2)
     with col7:
-        temp_r = st.number_input("TEMP (R)")
+        temp_r = st.number_input("🌡️TEMP (R)")
     with col8:
-        temp_l = st.number_input("TEMP (L)")
+        temp_l = st.number_input("🌡️TEMP (L)")
 
-    defect = st.selectbox("Defect", ["Burn", "Black", "Excess"])
-    remark = st.text_input("Remark")
+    defect = st.selectbox("⚠️Defect", ["Burn", "Black", "Excess"])
+    remark = st.text_input("📝Remark")
 
     # Collect row data
     row_data = {
